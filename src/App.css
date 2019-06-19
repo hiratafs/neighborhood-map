@@ -1,0 +1,38 @@
+html, body {
+  font-family: 'Heebo', sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-decoration: none
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+#map {
+  height: 100vh;
+}
+
+
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
