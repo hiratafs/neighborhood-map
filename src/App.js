@@ -8,10 +8,9 @@ class App extends React.Component {
   state = {
     dataPlaces : dataPlaces,
     markers: [],
-
   }
 
-
+  //RENDER MAP
   componentDidMount() {
     this.showMap()
   }
@@ -21,6 +20,7 @@ class App extends React.Component {
     window.initMap = this.initMap
   }
 
+  //MAP CONFIGURATION 
   initMap = () => {
       let map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: -15.5926919, lng: -56.0903047},
@@ -78,19 +78,31 @@ class App extends React.Component {
           
           {/* LIST OF SIGHTS */}
           <aside className="filter">
-            <input type='text'></input>
-                  <ul className="places-options">
-                    <li><a href="#">Sesc Arsenal</a></li>
-                    <li><a href="#">Parque das Águas</a></li>
-                    <li><a href="#">Orla do Porto</a></li>
-                    <li><a href="#">Arena Pantanal</a></li>
-                    <li><a href="#">Parque Tia Nair</a></li>
-                    <li><a href="#">Feira do Porto</a></li>
-                    <li><a href="#">Praça Popular</a></li>
-                    <li><a href="#">Praça da Mandioca</a></li>
-                    <li><a href="#">Igreja Bom Despacho</a></li>
-                    <li><a href="#">Igreja do Rosário</a></li>
+            <div className="search">
+              <label htmlFor="options"><span className="label-search">Search in Cuiabá</span></label>
+              <input type='text' id="options" placeholder="Type here"></input>
+            </div>
+                <div className="places-options">
+                  <ul>
+                      <li><a href="#">Sesc Arsenal</a></li>
+                      <li><a href="#">Parque das Águas</a></li>
+                      <li><a href="#">Orla do Porto</a></li>
+                      <li><a href="#">Arena Pantanal</a></li>
+                      <li><a href="#">Parque Tia Nair</a></li>
+                      <li><a href="#">Feira do Porto</a></li>
+                      <li><a href="#">Praça Popular</a></li>
+                      <li><a href="#">Praça da Mandioca</a></li>
+                      <li><a href="#">Igreja Bom Despacho</a></li>
+                      <li><a href="#">Igreja do Rosário</a></li>
+                      <li><a href="#">Raposa Vegana</a></li>
+                      <li><a href="#">Arado Natural</a></li>
+                      <li><a href="#">Burguer na Praça</a></li>
+                      <li><a href="#">Shopping Estação Cuiabá</a></li>
+                      <li><a href="#">Goiabeiras Shopping</a></li>
+                      <li><a href="#">Pantanal Shopping</a></li>
+                      <li><a href="#">Shopping 3 Américas</a></li>
                   </ul>
+                </div>
           </aside>
           
       </div>
@@ -98,6 +110,7 @@ class App extends React.Component {
   }
 }
 
+// INSERT GOOGLE MAPS API SCRIPT
 function installMap (url) {
     let getfirstscript = window.document.getElementsByTagName('script')[0];
     let script = window.document.createElement('script');
