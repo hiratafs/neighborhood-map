@@ -35,6 +35,9 @@ a {
 
 .search {
   padding: 20px;
+  position: fixed;
+  background-color: #0b9e8a;
+  z-index: 1;
 }
 
 .label-search {
@@ -54,6 +57,8 @@ input {
 .places-options {
   width: 90%;
   margin: 0 auto;
+  position: relative;
+  top: 150px;
 }
 
 .places-options ul {
