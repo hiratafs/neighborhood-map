@@ -1,23 +1,46 @@
 import React from 'react';
 import './App.css';
-import dataPlaces from './dataPlaces.js';
-import { GMAP_ID } from './dataAPI.js';
-//import { FS_ID } from './dataAPI.js';
-//import { FS_CLIENT_ID } from './dataAPI.js';
-import { getPlace } from './FoursquareAPI.js'
- //import Map from './Map.js';
+import axios from 'axios';
+
+const GMAP_ID = 'AIzaSyB9FdQGy5y1yZLQcG20qvf2FwVeVu6UMsM';
+const apikey = 'N9uoPrrbgvV9bZzZDgt0EfHLfVIpgtWXYpwno1jTgJbvbSfD1_1dN589w6Egvkp_QN-TKdUMtGohdENnIlRlXQu6sSd2b5_MhyUXmUT6af7mTLlneezTfR36InUSXXYx';
+const herokucors = 'https://cors-anywhere.herokuapp.com/'
+const apiUrl = "https://api.yelp.com/v3/businesses/search";
+
+const configuration ={
+  headers: {
+    'Authorization': `Bearer ${apikey}`
+  },
+  params: { 
+    location: 'Cuiaba',
+    categories: 'burger'
+  }
+}
 
 class App extends React.Component {
   
   state = {
-    dataPlaces : dataPlaces,
+    cuiabaPlaces: [],
     markers: [],
   }
 
   
   //RENDER MAP
   componentDidMount() {
+    this.retrieveYelpData();
     this.showMap()
+  }
+
+  retrieveYelpData = () => {
+    axios.get(`${herokucors}${apiUrl}`, configuration)
+    .then(response => {
+      if(response.status === 200) {
+        this.setState({cuiabaPlaces: response.data.businesses});
+        console.log(this.state.cuiabaPlaces[0].coordinates)
+      }
+    })
+    .catch(err => console.log(err))
+    
   }
 
   showMap = () => {
@@ -33,31 +56,17 @@ class App extends React.Component {
       mapTypeControl: false
     });
 
-    let largeInfowindow = new window.google.maps.InfoWindow();
-    let bounds = new window.google.maps.LatLngBounds();
+    //let largeInfowindow = new window.google.maps.InfoWindow();
+    //let bounds = new window.google.maps.LatLngBounds();
 
-    for(let i = 0; i < dataPlaces.length; i++) {
-      let position = dataPlaces[i].location;
-      let title = dataPlaces[i].title;
-      
-
-      let marker = new window.google.maps.Marker({
-        map: map,
-        position: position,
-        title: title,
-        animation: window.google.maps.Animation.DROP,
-        id: i,
-
-      })
-
-      this.state.markers.push(marker);
-      bounds.extend(marker.position);
-      marker.addListener('click', function() {
-        populateInfoWindow(this, largeInfowindow);
-      })
-    }    
-
-    map.fitBounds(bounds);
+    for(let i = 0; i < this.state.cuiabaPlaces.length; i++) {
+      let position = {lat: this.state.cuiabaPlaces[i].coordinates.latitude,
+                      lng: this.state.cuiabaPlaces[i].coordinates.longitude }
+      let title = this.state.cuiabaPlaces[i].name;
+    
+    }
+       
+    //map.fitBounds(bounds);
 
     function populateInfoWindow(marker, infowindow) {
       if(infowindow.marker !== marker) {
@@ -68,15 +77,12 @@ class App extends React.Component {
           infowindow.setMap(null)
         })
       }
-    }
+    }  
 
   }   
 
 
   render () {
-    dataPlaces.map((place) => {
-      return getPlace(place)
-    });
     return (
       <div className="App">
           {/* MAP CONTAINER */}
@@ -93,7 +99,6 @@ class App extends React.Component {
                   <ul>
                       <li><a href="http://localhost:3000">Sesc Arsenal</a></li>
                       <li><a href="http://localhost:3000">Parque das Águas</a></li>
-                      <li><a href="http://localhost:3000">Orla do Porto</a></li>
                       <li><a href="http://localhost:3000">Arena Pantanal</a></li>
                       <li><a href="http://localhost:3000">Parque Tia Nair</a></li>
                       <li><a href="http://localhost:3000">Feira do Porto</a></li>
