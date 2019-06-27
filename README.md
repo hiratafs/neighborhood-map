@@ -1,11 +1,13 @@
 # Projeto Neighborhood Map
-Este projeto do Nanodegree Web Front-End Avançado consistiu em desenvolver, a partir do zero, um mapa interativo de algum local existente utilizando a API Google Maps, React e uma API de terceiros. No caso, optei por mostrar alguns pontos da cidade de Cuiabá com a ajuda da API do Yelp.
+Este projeto do Nanodegree Web Front-End Avançado consistiu em desenvolver, a partir do zero, um mapa interativo de uma localidade existente utilizando a API Google Maps, React e ao menos uma API de terceiros. No caso, optei por mostrar alguns restaurantes da cidade de Cuiabá com a ajuda da API do Yelp, que trouxe dados como fotos do local, endereço, preço e telefone.
+
+O projeto precisa ter marcadores para cada local disponível, além de um campo para que o usuário filtre as opções desejadas.
 
 
 ## Como funciona
 - Clone ou baixe o arquivo zipado para sua máquina local;
-- Dentro da pasta do projeto, abra o terminal e digite o comando yarn install, para instalar todas as dependências;
-- Depois inicie o servidor com o comando yarn start para que o navegador abra o mapa.
+- Dentro da pasta do projeto, abra o terminal e digite o comando `yarn install`, para instalar todas as dependências;
+- Depois inicie o servidor com o comando `yarn start` para que o navegador abra o mapa.
 
 ## Recursos utilizados neste projeto
 1. [React](https://pt-br.reactjs.org/)
