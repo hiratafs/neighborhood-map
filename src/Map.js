@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Map extends Component {
-    
+const Map = (props) => {
+    return(
+        <div id="map" tabIndex='-1'></div>
+    )
 }
 
 export default Map
