@@ -14,3 +14,4 @@ O projeto precisa ter marcadores para cada local disponível, além de um campo 
 2. [API Google Maps](https://developers.google.com/maps/documentation/?hl=pt-br)
 3. [API Yelp](https://www.yelp.com/developers)
 4. [Axios](https://github.com/axios/axios)
+5. [Lodash](https://lodash.com)
