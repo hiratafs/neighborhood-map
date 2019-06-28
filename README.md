@@ -3,10 +3,10 @@ Este projeto do Nanodegree Web Front-End Avançado consistiu em desenvolver, a p
 
 O projeto precisa ter marcadores para cada local disponível, além de um campo para que o usuário filtre as opções desejadas.
 
-Neighborhood map
-This Nanodegree Project consisted by developing from scratch an interactive map from a existent location with the use of Google Maps API, React and at least an third-party API. In this project I opted for showing some restaurants from Cuiaba city with the use of Yelp API, which provided data such as photos, address, price and phone number. 
+**Neighborhood map**
+*This Nanodegree Project consisted by developing from scratch an interactive map from a existent location with the use of Google Maps API, React and at least an third-party API. In this project I opted for showing some restaurants from Cuiaba city with the use of Yelp API, which provided data such as photos, address, price and phone number. 
 
-The project must have markers for each available location, plus a search field for the user to filter his/her desired options.
+*The project must have markers for each available location, plus a search field for the user to filter his/her desired options.
 
 
 ## Como funciona
