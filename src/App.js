@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import Map from './Map'
-import Search from './Search'
+import Map from './components/Map'
+import Search from './components/Search'
+import Place from './components/Place'
 import imgNotAvailable from './img/business_large_square.png'
+
 
 //GOOGLE MAP ID
 const GMAP_ID = 'AIzaSyB9FdQGy5y1yZLQcG20qvf2FwVeVu6UMsM';
@@ -11,7 +13,7 @@ const GMAP_ID = 'AIzaSyB9FdQGy5y1yZLQcG20qvf2FwVeVu6UMsM';
 //YELP API KEY
 const apikey = 'N9uoPrrbgvV9bZzZDgt0EfHLfVIpgtWXYpwno1jTgJbvbSfD1_1dN589w6Egvkp_QN-TKdUMtGohdENnIlRlXQu6sSd2b5_MhyUXmUT6af7mTLlneezTfR36InUSXXYx';
 
-//
+//BASE URLs
 const herokucors = 'https://cors-anywhere.herokuapp.com/'
 const apiUrl = "https://api.yelp.com/v3/businesses/search";
 
@@ -35,7 +37,6 @@ class App extends React.Component {
     markers: [],
   }
 
-  
   //RENDER MAP
   componentDidMount() {
     this.retrieveYelpData();
@@ -89,7 +90,6 @@ class App extends React.Component {
           `<p><strong>Price:</strong> ${local.price} </p>` +
           `<p><i>Data from <a href='http://www.yelp.com'>Yelp API</a></i></p>` +
           '</div>'
-
    
       //Insert markers into YelpMarkers array
       YelpMarkers.push(marker);
@@ -97,16 +97,15 @@ class App extends React.Component {
       //Add a event listener to each marker and open an infowindow
       marker.addListener('click', function() {
         populateInfoWindow(this, largeInfowindow, contentString)
-      })
+      });
+
     })
 
-   
-
+    //Create the infowindows container
     let largeInfowindow = new window.google.maps.InfoWindow({maxWidth:250});
     //let bounds = new window.google.maps.LatLngBounds();
 
-          
-       
+
     //map.fitBounds(bounds);
 
    // FUNCTION TO DISPLAY INFOWINDOW
@@ -129,17 +128,13 @@ class App extends React.Component {
       <div className="App">
           {/* MAP CONTAINER */}
             <Map />          
-          
-          {/* LIST OF WHERE TO EAT IN CUIABA */}
+
+          {/* LIST OF WHERE PLACES */}
           <aside className="filter">
               <Search />
                 <div className="places-options">
                   <ul>
-                      <li><a placename={this.state.cuiabaPlaces.name} href="http://localhost:3000">Sesc Arsenal</a></li>
-                      <li><a placename={this.state.cuiabaPlaces.name} href="http://localhost:3000">Parque das Águas</a></li>
-                      <li><a placename={this.state.cuiabaPlaces.name} href="http://localhost:3000">Arena Pantanal</a></li>
-                      <li><a placename={this.state.cuiabaPlaces.name} href="http://localhost:3000">Parque Tia Nair</a></li>
-                      <li><a placename={this.state.cuiabaPlaces.name} href="http://localhost:3000">Feira do Porto</a></li>
+                    <Place />
                   </ul>
                 </div>
           </aside>
