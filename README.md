@@ -15,11 +15,11 @@ O projeto precisa ter marcadores para cada local disponível, além de um campo 
 - Depois inicie o servidor com o comando `yarn start` para que o navegador abra o mapa.
 
 **How it works**
-- *Clone or download the project to your computer *
-- *Inside the project folder, open up the terminal and enter `yarn install` so as to download all the dependencies *
+- *Clone or download the project to your computer*
+- *Inside the project folder, open up the terminal and enter `yarn install` so as to download all the dependencies*
 - *Initialize server with `yarn start`so the browser will show the map.*
 
-## Recursos utilizados neste projeto
+## Recursos utilizados neste projeto/ Resources used in this project
 1. [React](https://pt-br.reactjs.org/)
 2. [API Google Maps](https://developers.google.com/maps/documentation/?hl=pt-br)
 3. [API Yelp](https://www.yelp.com/developers)
