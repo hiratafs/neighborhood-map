@@ -47,7 +47,6 @@ class App extends React.Component {
     .then(response => {
       if(response.status === 200) {
         this.setState({cuiabaPlaces: response.data}, this.showMap());
-        console.log(this.state.cuiabaPlaces.businesses)
       }
     })
     .catch(err => console.log(err))
@@ -83,12 +82,13 @@ class App extends React.Component {
       let imgReview = local.image_url && local.image_url !== '' ? local.image_url : imgNotAvailable;
 
       let contentString = `<div className="infowindow">` +
-      `<h1> ${local.name} </h1>` +
-      `<img style='max-width:200px' src=${imgReview} alt=${local.name} />` +
-      `<p><strong>Address:</strong> ${local.location.display_address} </p>` +
-      `<p><strong>Phone:</strong> ${local.phone} </p>` +
-      `<p><strong>Price:</strong> ${local.price} </p>` +
-      '</div>'
+          `<h1> ${local.name} </h1>` +
+          `<img style='max-width:200px' src=${imgReview} alt=${local.name} />` +
+          `<p><strong>Address:</strong> ${local.location.display_address} </p>` +
+          `<p><strong>Phone:</strong> ${local.phone} </p>` +
+          `<p><strong>Price:</strong> ${local.price} </p>` +
+          `<p><i>Data from <a href='http://www.yelp.com'>Yelp API</a></i></p>` +
+          '</div>'
 
    
       //Insert markers into YelpMarkers array
