@@ -86,11 +86,9 @@ input {
 
 .infowindow {
   display:flex;
+  justify-content: center;
 }
-.infowindow .yelp-image {
-  max-width: 100%;
-  align-self: center;
-}
+
 
 @keyframes App-logo-spin {
   from {
