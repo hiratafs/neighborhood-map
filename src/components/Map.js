@@ -8,7 +8,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultCenter={{lat: -15.5926919, lng: -56.0903047}}
   >
     {props.markers.map((marker, id) => (
-        <Marker key={id} position={{ lat: marker.lat, lng: marker.lng}} />
+        <Marker key={id} position={{ lat: marker.lat, lng: marker.lng}} title={marker.title} animation={marker.animation}/>
     )
         )}
   </GoogleMap>
