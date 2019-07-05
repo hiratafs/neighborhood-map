@@ -56,7 +56,7 @@ class App extends React.Component {
       headers: {'Authorization': `Bearer ${apikey}` },
       params: { 
         location: 'Cuiaba',
-        categories: 'restaurants',
+        categories: 'pizza,restaurants,steak',
       }
     }
     axios.get(`${herokucors}${apiUrl}/search`, configuration)
@@ -65,7 +65,9 @@ class App extends React.Component {
       let markers = placesinCuiaba.map(local => {
         return {
         lat: local.coordinates.latitude,
-        lng: local.coordinates.longitude
+        lng: local.coordinates.longitude,
+        title: local.name,
+        animation: window.google.maps.Animation.DROP
         }
       })
       this.setState({placesinCuiaba:placesinCuiaba, markers: markers})
