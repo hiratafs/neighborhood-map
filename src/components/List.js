@@ -7,7 +7,7 @@ class List extends React.Component {
             <div className="places-options">
                 <ul>
                 {this.props.placesinCuiaba && this.props.placesinCuiaba.map((local, id) => 
-                    <Place id={id} {...local} />
+                    <Place key={id} {...local} />
                 )}
                 </ul>
             </div>
