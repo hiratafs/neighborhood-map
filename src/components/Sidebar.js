@@ -3,6 +3,11 @@ import List from './List'
 
 
 class Sidebar extends Component {
+
+    updateQuery = (query) => {
+        this.setState({query: query})
+    }
+
     render () {
         return (
             <div >
@@ -10,7 +15,7 @@ class Sidebar extends Component {
                 <label htmlFor="options"><span className="label-search">Restaurants in Cuiabá</span></label>
                   <input type='search' id="search" placeholder="Filter restaurant"></input>
                 </div>
-                  <List {...this.props} />
+                  <List {...this.props} handleClickList={this.props.handleClickList}/>
             </div>
          
         )

@@ -21,7 +21,6 @@ class App extends React.Component {
     placesinCuiaba: [],
     markers: [],
     map: {}
-
   }
 
   //RENDER MAP
@@ -29,26 +28,36 @@ class App extends React.Component {
     this.getAllLocations()
   }
  
-  
-
- 
-/*   searchYelp = (query) => {
-    const configuration = {
-      headers: {'Authorization': `Bearer ${apikey}` },
-      params: { 
-        location: 'Cuiaba',
-        categories: 'restaurants',
-        term: query
-      }
-    }
-    axios.get(`${herokucors}${apiUrl}/search`, configuration)
-    .then(response => {
-      if(response.status === 200 && response.data.length !== 0) {
-
-      }
+  hideInfoWindow = () => {
+    const markers = this.state.markers.map(marker => {
+      marker.infowindowIsOpen = false;
+      return marker
     })
-    .catch(err => console.log(err))
-  } */
+    this.setState({markers: Object.assign(this.state.markers, markers)})
+  }
+
+  showInfoWindow = marker => {
+    this.hideInfoWindow();
+    marker.infowindowIsOpen = true;
+    this.setState({markers: Object.assign(this.state.markers, marker)})
+    this.searchLocation(marker.id)
+  }
+
+
+  searchLocation = (localID) => {
+    let configuration = {
+      headers: {'Authorization': `Bearer ${apikey}`}
+    }
+    axios.get(`${herokucors}${apiUrl}/${localID}`, configuration)
+    .then(response => {return response.data})
+    
+  }
+
+  handleClickList = local => {
+    const marker = this.state.markers.find(marker => marker.id === local.id);
+    this.showInfoWindow(marker)
+  }
+
 
   // GET ALL LOCATIONS FUNCTION
   getAllLocations = () => {
@@ -67,7 +76,14 @@ class App extends React.Component {
         lat: local.coordinates.latitude,
         lng: local.coordinates.longitude,
         title: local.name,
-        animation: window.google.maps.Animation.DROP
+        animation: window.google.maps.Animation.DROP,
+        id: local.id,
+        address: local.location.address1,
+        phone: local.phone,
+        rating: local.rating,
+        infowindowIsOpen: false,
+        markerIsVisible: true,
+        image: local.image_url
         }
       })
       this.setState({placesinCuiaba:placesinCuiaba, markers: markers})
@@ -79,11 +95,11 @@ class App extends React.Component {
     return (
       <div className="App">
           {/* MAP CONTAINER */}
-            <Map {...this.state}/>          
+            <Map {...this.state} showInfoWindow={this.showInfoWindow}/>          
 
           {/* LIST OF WHERE PLACES */}
           <aside className="filter">
-              <Sidebar {...this.state}/>             
+              <Sidebar {...this.state} handleClickList={this.handleClickList}/>             
           </aside>
           
       </div>
