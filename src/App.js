@@ -40,24 +40,17 @@ class App extends React.Component {
     this.hideInfoWindow();
     marker.infowindowIsOpen = true;
     this.setState({markers: Object.assign(this.state.markers, marker)})
-    this.searchLocation(marker.id)
   }
 
-
-  searchLocation = (localID) => {
-    let configuration = {
-      headers: {'Authorization': `Bearer ${apikey}`}
-    }
-    axios.get(`${herokucors}${apiUrl}/${localID}`, configuration)
-    .then(response => {return response.data})
-    
-  }
 
   handleClickList = local => {
     const marker = this.state.markers.find(marker => marker.id === local.id);
     this.showInfoWindow(marker)
   }
 
+  updateState = (item) => {
+    this.setState(item)
+  }
 
   // GET ALL LOCATIONS FUNCTION
   getAllLocations = () => {
@@ -66,6 +59,7 @@ class App extends React.Component {
       params: { 
         location: 'Cuiaba',
         categories: 'pizza,restaurants,steak',
+        limit: 10
       }
     }
     axios.get(`${herokucors}${apiUrl}/search`, configuration)
@@ -95,11 +89,11 @@ class App extends React.Component {
     return (
       <div className="App">
           {/* MAP CONTAINER */}
-            <Map {...this.state} showInfoWindow={this.showInfoWindow}/>          
+            <Map {...this.state} showInfoWindow={this.showInfoWindow} tabIndex="0" role="application" />          
 
           {/* LIST OF WHERE PLACES */}
           <aside className="filter">
-              <Sidebar {...this.state} handleClickList={this.handleClickList}/>             
+              <Sidebar {...this.state} handleClickList={this.handleClickList} updateState={this.updateState} tabIndex="0"/>             
           </aside>
           
       </div>

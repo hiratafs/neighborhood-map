@@ -11,7 +11,7 @@ class List extends React.Component {
             <div className="places-options">
                 <ul>
                 {this.props.placesinCuiaba && this.props.placesinCuiaba.map((local, id) => 
-                    <Place key={id} {...local} handleClickList={this.props.handleClickList} />
+                    <Place key={id} {...local} handleClickList={this.props.handleClickList} tabIndex="0" />
                 )}
                 </ul>
             </div>
