@@ -28,8 +28,10 @@ a {
 }
 
 
-#map {
-  height: 100vh;
+.wrap {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap
 }
 
 .filter {
@@ -37,14 +39,19 @@ a {
   overflow: auto;
   box-shadow: 0 0 8px 10px rgba(0,0,0,0.2);
   z-index: 1;
-  max-height: 100vh
+  max-height: 100vh;
+  display: flex;
+  flex-wrap: wrap
 }
 
 .search {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
-  position: absolute;
+  position: relative;
   background-color: #0b9e8a;
-  top:0
+  width:100%
 }
 
 .label-search {
@@ -67,7 +74,7 @@ input {
   overflow: auto;
   margin: 0 auto;
   position: relative;
-  top: 150px;
+
 }
 
 .places-options ul {
@@ -103,3 +110,9 @@ input {
   justify-content: center;
 }
 
+@media screen and (max-width: 350) {
+  .App {
+    display: grid;
+    grid-template-columns: 1fr
+  }
+}
