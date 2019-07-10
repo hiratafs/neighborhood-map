@@ -25,3 +25,4 @@ O projeto precisa ter marcadores para cada local disponível, além de um campo 
 3. [API Yelp](https://www.yelp.com/developers)
 4. [Axios](https://github.com/axios/axios)
 5. [React Google Maps](https://tomchentw.github.io/react-google-maps/)
+6. [EscapeRegExp](https://www.npmjs.com/package/escape-string-regexp)
