@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, InfoWindow, GoogleMap, Marker } from 'react-google-maps';
 
-
+//REACT-GOOGLE-MAPS CONFIGURATION 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
     defaultZoom={13.75}
     defaultCenter={{lat: -15.5926919, lng: -56.0903047}}
   >
+    {/* CREATE MARKERS AND INFOWINDOWS ON MAP */}
     {props.filteredresults.map((marker, id) => (
         
         <Marker key={id} position={{ lat: marker.lat, lng: marker.lng}} containerProps={{tabIndex: 0}} title={marker.title} animation={marker.animation} onClick={() => props.showInfoWindow(marker)}>
