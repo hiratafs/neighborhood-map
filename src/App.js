@@ -4,6 +4,7 @@ import axios from 'axios';
 import Map from './components/Map'
 import Sidebar from './components/Sidebar'
 //import imgNotAvailable from './img/business_large_square.png'
+import escapeRegExp  from 'escape-string-regexp'
 
 
 //YELP API KEY
@@ -17,10 +18,35 @@ const apiUrl = "https://api.yelp.com/v3/businesses";
 
 class App extends React.Component {
   
-  state = {
-    placesinCuiaba: [],
-    markers: [],
-    map: {}
+  constructor() {
+    super()
+
+    this.state = {
+      placesinCuiaba: [],
+      markers: [],
+      map: {},
+      filteredresults: [],
+      query: '',
+
+      updateState: item => {
+        this.setState(item)
+      }
+    }
+  }
+  
+
+  updateQuery = (event) => {
+      this.setState({query: event.target.value});
+      let filteredresults;
+    
+   if(this.state.query && this.state.query.length !== 0 ) {
+      const match = new RegExp(escapeRegExp(this.state.query), 'i');
+      filteredresults = this.state.markers.filter((local) => match.test(local.title));
+      this.state.updateState({filteredresults: filteredresults})
+   } else {
+      
+   }    
+    
   }
 
   //RENDER MAP
@@ -48,10 +74,6 @@ class App extends React.Component {
     this.showInfoWindow(marker)
   }
 
-  updateState = (item) => {
-    this.setState(item)
-  }
-
   // GET ALL LOCATIONS FUNCTION
   getAllLocations = () => {
     const configuration = {
@@ -65,6 +87,7 @@ class App extends React.Component {
     axios.get(`${herokucors}${apiUrl}/search`, configuration)
     .then(response => {
       let placesinCuiaba = response.data.businesses;
+      //console.log(placesinCuiaba)
       let markers = placesinCuiaba.map(local => {
         return {
         lat: local.coordinates.latitude,
@@ -81,8 +104,13 @@ class App extends React.Component {
         }
       })
       this.setState({placesinCuiaba:placesinCuiaba, markers: markers})
+      
     })
   }
+
+
+
+
 
 
   render () {
@@ -93,7 +121,7 @@ class App extends React.Component {
 
           {/* LIST OF WHERE PLACES */}
           <aside className="filter">
-              <Sidebar {...this.state} handleClickList={this.handleClickList} updateState={this.updateState} tabIndex="0"/>             
+              <Sidebar {...this.state} handleClickList={this.handleClickList} updateQuery={this.updateQuery} tabIndex="0"/>             
           </aside>
           
       </div>
