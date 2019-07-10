@@ -3,8 +3,8 @@ import './App.css';
 import axios from 'axios';
 import Map from './components/Map'
 import Sidebar from './components/Sidebar'
-//import imgNotAvailable from './img/business_large_square.png'
 import escapeRegExp  from 'escape-string-regexp'
+
 
 
 //YELP API KEY
@@ -26,8 +26,7 @@ class App extends React.Component {
       markers: [],
       map: {},
       filteredresults: [],
-      query: '',
-
+ 
       updateState: item => {
         this.setState(item)
       }
@@ -35,25 +34,28 @@ class App extends React.Component {
   }
   
 
+  //FILTER LOCATIONS
   updateQuery = (event) => {
-      this.setState({query: event.target.value});
-      let filteredresults;
+      const query = event.target.value;
+        //this.setState({query});
+        let filteredresults;
     
-   if(this.state.query && this.state.query.length !== 0 ) {
-      const match = new RegExp(escapeRegExp(this.state.query), 'i');
-      filteredresults = this.state.markers.filter((local) => match.test(local.title));
-      this.state.updateState({filteredresults: filteredresults})
-   } else {
-      
-   }    
-    
-  }
+    if(query.length > 0) {
+        const match = new RegExp(escapeRegExp(query), 'i');
+        filteredresults = this.state.markers.filter((local) => match.test(local.title));
+        this.state.updateState({filteredresults: filteredresults});
+    }  else {
+       this.state.updateState({filteredresults: this.state.markers })
+    }
+  } 
+
 
   //RENDER MAP
   componentDidMount() {
     this.getAllLocations()
   }
  
+  //HIDE INFOWINDOWS WHEN MARKER IS CLICKED
   hideInfoWindow = () => {
     const markers = this.state.markers.map(marker => {
       marker.infowindowIsOpen = false;
@@ -62,6 +64,7 @@ class App extends React.Component {
     this.setState({markers: Object.assign(this.state.markers, markers)})
   }
 
+  //SHOW INFOWINDOWS WHEN MARKER IS CLICKED
   showInfoWindow = marker => {
     this.hideInfoWindow();
     marker.infowindowIsOpen = true;
@@ -69,6 +72,7 @@ class App extends React.Component {
   }
 
 
+  //SHOW INFOWINDOWS WHEN LIST ITEM IS CLICKED
   handleClickList = local => {
     const marker = this.state.markers.find(marker => marker.id === local.id);
     this.showInfoWindow(marker)
@@ -84,6 +88,8 @@ class App extends React.Component {
         limit: 10
       }
     }
+
+    //RETRIEVE DATA FROM YELP FUSION
     axios.get(`${herokucors}${apiUrl}/search`, configuration)
     .then(response => {
       let placesinCuiaba = response.data.businesses;
@@ -100,10 +106,11 @@ class App extends React.Component {
         rating: local.rating,
         infowindowIsOpen: false,
         markerIsVisible: true,
-        image: local.image_url
+        image: local.image_url,
+
         }
       })
-      this.setState({placesinCuiaba:placesinCuiaba, markers: markers})
+      this.setState({placesinCuiaba:placesinCuiaba, markers: markers, filteredresults: markers})
       
     })
   }
@@ -119,7 +126,7 @@ class App extends React.Component {
           {/* MAP CONTAINER */}
             <Map {...this.state} showInfoWindow={this.showInfoWindow} tabIndex="0" role="application" />          
 
-          {/* LIST OF WHERE PLACES */}
+          {/* LIST OF RESTAURANTS */}
           <aside className="filter">
               <Sidebar {...this.state} handleClickList={this.handleClickList} updateQuery={this.updateQuery} tabIndex="0"/>             
           </aside>
