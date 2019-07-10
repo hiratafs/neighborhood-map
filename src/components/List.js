@@ -10,8 +10,8 @@ class List extends React.Component {
         return (
             <div className="places-options">
                 <ul>
-                {this.props.placesinCuiaba && this.props.placesinCuiaba.map((local, id) => 
-                    <Place key={id} {...local} handleClickList={this.props.handleClickList} tabIndex="0" />
+                {this.props.filteredresults && this.props.filteredresults.map((marker, id) => 
+                    <Place key={id} {...marker} name={marker.title} handleClickList={this.props.handleClickList} tabIndex="0" />
                 )}
                 </ul>
             </div>
