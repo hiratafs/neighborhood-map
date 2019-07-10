@@ -7,9 +7,9 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultZoom={13.75}
     defaultCenter={{lat: -15.5926919, lng: -56.0903047}}
   >
-    {props.markers.map((marker, id) => (
+    {props.filteredresults.map((marker, id) => (
         
-        <Marker key={id} position={{ lat: marker.lat, lng: marker.lng}} title={marker.title} animation={marker.animation} onClick={() => props.showInfoWindow(marker)}>
+        <Marker key={id} position={{ lat: marker.lat, lng: marker.lng}} containerProps={{tabIndex: 0}} title={marker.title} animation={marker.animation} onClick={() => props.showInfoWindow(marker)}>
             {marker.infowindowIsOpen && 
             (<InfoWindow>
                 <div>
@@ -29,6 +29,8 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 ))
 
 class Map extends Component {
+    
+
     render () {
         return(
             <MyMapComponent
@@ -38,6 +40,7 @@ class Map extends Component {
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
+                containerProps={{tabIndex: 0}}
             />
         )
     }
