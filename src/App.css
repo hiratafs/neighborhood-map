@@ -1,3 +1,65 @@
+@media screen and (min-width: 601px) {
+
+  .App {
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }
+  span.label-search {
+    font-size: 1.2em;
+  }
+
+  .places-options ul li {
+    font-size: 0.8em;
+    text-indent: 30px;
+    text-align: center
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .App {
+    display: grid;
+    grid-template-columns: 100%
+  }
+
+ .App > div > div {
+   width: 100vw;
+   overflow: hidden;
+ }
+  .filter {
+    width: 100vw;
+    height: 30vh;
+    position: absolute
+  }
+
+   .wrap.search {
+    width: 100%;
+    padding: 10px;
+    height: 70px;
+    position: sticky;
+  }
+
+  span.label-search {
+    font-size: 1em;
+  }
+
+  .search input {
+    padding: 5px;
+    font-size: 1em
+  }
+
+  div.places-options {
+    height: 130px;
+  }
+  div.places-options ul li {
+    padding: 5px;
+    font-size: 0.8em;
+    text-indent: 50px
+  }
+}
+
+
+
 
 html, body {
   font-family: 'Heebo', sans-serif;
@@ -6,10 +68,6 @@ html, body {
   margin: 0;
   padding: 0;
   text-decoration: none
-}
-
-h1 {
-  font-size: 1.2em;
 }
 
 ul {
@@ -31,13 +89,12 @@ a {
 .wrap {
   position: relative;
   display: flex;
-  flex-wrap: wrap
+  flex-wrap: wrap;
+  background-color: #0995C0;
+  box-shadow: 0 0 8px 10px rgba(0,0,0,0.2);
 }
 
 .filter {
-  background-color: #0995C0;
-  overflow: auto;
-  box-shadow: 0 0 8px 10px rgba(0,0,0,0.2);
   z-index: 1;
   max-height: 100vh;
   display: flex;
@@ -54,7 +111,7 @@ a {
   width:100%
 }
 
-.label-search {
+span.label-search {
   font-size: 1.8em;
   color: white;
   font-weight: bold;
@@ -110,9 +167,3 @@ input {
   justify-content: center;
 }
 
-@media screen and (max-width: 350) {
-  .App {
-    display: grid;
-    grid-template-columns: 1fr
-  }
-}
