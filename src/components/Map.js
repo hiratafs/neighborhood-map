@@ -12,7 +12,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   >
     {/* CREATE MARKERS AND INFOWINDOWS ON MAP */}
     {props.filteredresults.map((marker, id) => (
-        <ErrorBoundaries>
         <Marker key={id} position={{ lat: marker.lat, lng: marker.lng}} containerProps={{tabIndex: 0}} title={marker.title} animation={marker.animation} onClick={() => props.showInfoWindow(marker)}>
             {marker.infowindowIsOpen && 
             (<InfoWindow>
@@ -28,7 +27,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
                 </div>
             </InfoWindow>)}
         </ Marker>
-        </ErrorBoundaries>
     )
         )}
   </GoogleMap>
