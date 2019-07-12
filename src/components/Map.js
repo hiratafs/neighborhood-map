@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, InfoWindow, GoogleMap, Marker } from 'react-google-maps';
+import ErrorBoundaries from './ErrorBoundaries'
 
 //REACT-GOOGLE-MAPS CONFIGURATION 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+
+
   <GoogleMap
     defaultZoom={13.75}
     defaultCenter={{lat: -15.5926919, lng: -56.0903047}}
   >
     {/* CREATE MARKERS AND INFOWINDOWS ON MAP */}
     {props.filteredresults.map((marker, id) => (
-        
+        <ErrorBoundaries>
         <Marker key={id} position={{ lat: marker.lat, lng: marker.lng}} containerProps={{tabIndex: 0}} title={marker.title} animation={marker.animation} onClick={() => props.showInfoWindow(marker)}>
             {marker.infowindowIsOpen && 
             (<InfoWindow>
@@ -21,12 +24,15 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
                         <p><strong>Address:</strong>{marker.address} </p>
                         <p><strong>Phone:</strong>{marker.phone}</p>
                         <p><strong>Rating:</strong>{marker.rating}</p>
+                        <p style={{color: 'red', textAlign:'center'}}><strong>Powered by <a href="http://yelp.com">Yelp!</a></strong></p>
                 </div>
             </InfoWindow>)}
         </ Marker>
+        </ErrorBoundaries>
     )
         )}
   </GoogleMap>
+
 ))
 
 class Map extends Component {
@@ -34,6 +40,7 @@ class Map extends Component {
 
     render () {
         return(
+            <ErrorBoundaries>
             <MyMapComponent
                 {...this.props}
                 isMarkerShown
@@ -43,6 +50,8 @@ class Map extends Component {
                 mapElement={<div style={{ height: `100%` }} />}
                 containerProps={{tabIndex: 0}}
             />
+
+            </ErrorBoundaries>
         )
     }
 }
