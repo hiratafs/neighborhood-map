@@ -51,7 +51,11 @@ class App extends React.Component {
 
   //RENDER MAP
   componentDidMount() {
-    this.getAllLocations()
+    this.getAllLocations();
+
+      window.gm_authFailure = () => {
+      alert("Oh, no! Google Maps couldn't be loaded!");
+    };
   }
  
   //HIDE INFOWINDOWS WHEN MARKER IS CLICKED
