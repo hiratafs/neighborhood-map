@@ -4,8 +4,7 @@ import axios from 'axios';
 import Map from './components/Map'
 import Sidebar from './components/Sidebar'
 import escapeRegExp  from 'escape-string-regexp'
-
-
+import ErrorBoundaries from './components/ErrorBoundaries'
 
 //YELP API KEY
 const apikey = 'N9uoPrrbgvV9bZzZDgt0EfHLfVIpgtWXYpwno1jTgJbvbSfD1_1dN589w6Egvkp_QN-TKdUMtGohdENnIlRlXQu6sSd2b5_MhyUXmUT6af7mTLlneezTfR36InUSXXYx';
@@ -112,6 +111,8 @@ class App extends React.Component {
       })
       this.setState({placesinCuiaba:placesinCuiaba, markers: markers, filteredresults: markers})
       
+    }).catch(err => {
+      alert('An error occurred! Please try again later! ' + err)
     })
   }
 
@@ -124,13 +125,14 @@ class App extends React.Component {
     return (
       <div className="App">
           {/* MAP CONTAINER */}
+          <ErrorBoundaries>
             <Map {...this.state} showInfoWindow={this.showInfoWindow} tabIndex="0" role="application" />          
-
           {/* LIST OF RESTAURANTS */}
           <aside className="filter">
               <Sidebar {...this.state} handleClickList={this.handleClickList} updateQuery={this.updateQuery} tabIndex="0"/>             
+            
           </aside>
-          
+          </ErrorBoundaries>
       </div>
     );
   }
