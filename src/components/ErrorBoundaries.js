@@ -30,6 +30,7 @@ export default class ErrorBoundaries extends React.Component {
                             <h3 style={{textAlign: 'center'}}>Oh, no! Something went wrong on {this.props.name}! Try again later!</h3>
                     ) : (
                             <h3>Oh, no! Something went wrong! :(</h3>
+
                     )}
 
                     <p>{this.state.error && this.state.error.toString()}</p>
